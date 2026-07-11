@@ -64,7 +64,7 @@ def gen_case3(scale=2.0, n_theta=720, flat_tol=2e-3):
     K = random_hermitian(3, scale)
     A = H + 1j * K
 
-    thetas = np.linspace(0, 2*np.pi, n_theta)
+    thetas = np.linspace(0, 2*np.pi, n_theta, endpoint=False)
     gaps = np.empty(n_theta)
 
     for i, th in enumerate(thetas):
@@ -85,3 +85,30 @@ def gen_case3(scale=2.0, n_theta=720, flat_tol=2e-3):
     }
     return A, 3, info
 
+# case 4: irreducible matrices, smooth boundary
+def gen_case4(scale=2.0, n_theta=720, flat_tol=1e-3):
+    H = random_hermitian(3, scale)
+    K = random_hermitian(3, scale)
+    A = H + 1j * K
+
+    thetas = np.linspace(0, 2*np.pi, n_theta, endpoint=False)
+    gaps = np.empty(n_theta)
+
+    for i, th in enumerate(thetas):
+        M = np.cos(th) * H + np.sin(th) * K
+        ev = np.sort(np.linalg.eigvalsh(M))
+        gaps[i] = ev[1] - ev[0]
+
+    min_gap = gaps.min()
+    typical_scale = np.abs(np.linalg.eigvalsh(H)).max() + 1e-9
+    rel_gap = min_gap / typical_scale
+    theta_min = thetas[np.argmin(gaps)]
+
+    if rel_gap > flat_tol:
+        info = {
+            "min_gap" : min_gap,
+            "rel_gap" : rel_gap,
+            "theta_min" : theta_min,
+        }
+
+    return A, 4, info
