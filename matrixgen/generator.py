@@ -32,11 +32,11 @@ def random_hermitian(n, scale=1.0):
     return (z + z.conj().T)/2
 
 def random_eigenvalues(k):
-    """Return ``k`` random, distinct eigenvalues."""
+    """Return k random, distinct eigenvalues."""
     return np.random.randn(k) + 1j * np.random.randn(k)
 
 def _support_gaps(H, K, n_theta):
-    """Smallest gap between the two largest support eigenvalues."""
+    """Smallest gap between the two largest eigenvalues."""
     thetas = np.linspace(0, 2 * np.pi, n_theta, endpoint=False)
     gaps = np.empty(n_theta)
     for i, theta in enumerate(thetas):
