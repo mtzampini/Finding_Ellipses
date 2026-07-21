@@ -79,7 +79,7 @@ def gen_case2(inside, scale=2.0):
     uhat = (lam2 - lam1) / (2*c) if c > 1e-6 else 1
     uper = 1j * uhat 
 
-    r = np.random.randn(0, 0.9) if inside else np.random.randn(1, 2.5)
+    r = np.random.uniform(0, 0.9) if inside else np.random.uniform(1, 2.5)
     t = np.random.uniform(0, 2*np.pi)
 
     lam0 = center + r * (a*np.cos(t)*uhat + b*np.sin(t)*uper)

@@ -1,7 +1,7 @@
 import numpy as np
 from generator import gen_case1, gen_case2, gen_case3, gen_case4
 from feature_extraction import feature_extractor
-from config import DatasetConfig
+from dataset_config import DatasetConfig
 from sklearn.model_selection import train_test_split
 
 def random_orthonormal_basis_batch(N, n=3):
@@ -20,7 +20,13 @@ def generate_case_pool(case_id, n, generator_fn, generator_kwargs):
     results = []
 
     for _ in range(n):
-        result = generator_fn(generator_kwargs)
+        
+        kwargs = dict(generator_kwargs)
+
+        if case_id == 2:
+            kwargs['inside'] = np.random.rand() < 0.5
+
+        result = generator_fn(**kwargs)
 
         if result['case'] != case_id:
             raise ValueError(f'returned {result['case']}, expected {case_id}')

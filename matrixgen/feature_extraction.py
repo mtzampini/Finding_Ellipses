@@ -1,5 +1,5 @@
 import numpy as np
-from build_function import coefficient_extractor
+from kippenhahn_symbolic import coefficient_extractor
 
 def matrix_to_params_batch(H_batch, K_batch):
     return (
@@ -28,7 +28,12 @@ def feature_extractor(A_batch):
     A_norm = normalize_batch(A_batch)
     H_batch, K_batch = extract_H_K_batch(A_norm)
     params = matrix_to_params_batch(H_batch, K_batch)
-    return np.stack(coefficient_extractor(*params), axis=1)[:, :9]
+
+    coeffs = coefficient_extractor(*params)
+    n = A_batch.shape[0]
+    coeffs = [np.broadcast_to(c, (n,)) for c in coeffs]
+
+    return np.stack(coeffs, axis=1)[:, :9]
 
 
 
