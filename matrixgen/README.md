@@ -10,11 +10,11 @@ closure theorem.
 
 ## The four cases
 
-1. **Normal** — A is normal, W(A) is the convex hull of the eigenvalues.
-2. **Reducible** — A ~ 2×2 ⊕ 1×1 block (ellipse + point).
-3. **Irreducible, flat boundary** — deliberate construction (repeated top
+1. **Normal**: A is normal, W(A) is the convex hull of the eigenvalues.
+2. **Reducible**: A ~ 2×2 ⊕ 1×1 block (ellipse + point).
+3. **Irreducible, flat boundary**: deliberate construction (repeated top
    eigenvalue of H(θ) over a portion of the angle).
-4. **Irreducible, smooth boundary** — generic/default case.
+4. **Irreducible, smooth boundary**: generic/default case.
 
 ## Repo structure
 
@@ -74,7 +74,7 @@ Two files per generated dataset, sharing a common prefix `{path_prefix}`:
 - [x] Augmentation via unitary conjugation, batched
 - [x] Assembler with correct split (augmentation post-split, no leakage)
 - [x] Standardization (fit on train, applied to all splits)
-- [ ] **"Hard" pool (dedicated boundary/test set)** — not yet integrated.
+- [ ] **"Hard" pool (dedicated boundary/test set)**: not yet integrated.
       Requires defining `generator_hard_kwargs` in `DatasetConfig` (tighter
       thresholds to push matrices close to the boundary between classes).
       The pipeline is already set up to accommodate it (see `standardize`,
