@@ -32,7 +32,7 @@ def random_hermitian(n, scale=1.0):
     return (z + z.conj().T)/2
 
 def random_eigenvalues(k):
-    """Return k random, distinct eigenvalues."""
+    """Return k  random, distinct eigenvalues."""
     return np.random.randn(k) + 1j * np.random.randn(k)
 
 def _support_gaps(H, K, n_theta):
@@ -53,12 +53,12 @@ def _relative_commutator_norm(A):
 
 
 # case 1: normal matrices
-def gen_case1(n, distinct_eigvals=3):
+def gen_case1(distinct_eigvals=3):
     if not 1 <= distinct_eigvals <= 3:
         raise ValueError("distinct_eigvals must be between 1 and n")
     
     eigvals = random_eigenvalues(distinct_eigvals)
-    Q = random_orthonormal_basis(n)
+    Q = random_orthonormal_basis(3)
     A = Q @ np.diag(eigvals) @ Q.conj().T
     
     certificate = _relative_commutator_norm(A)
