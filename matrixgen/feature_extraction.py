@@ -1,5 +1,8 @@
 import numpy as np
-from kippenhahn_symbolic import coefficient_extractor
+try:
+    from kippenhahn_symbolic import coefficient_extractor
+except ImportError:
+    from matrixgen.kippenhahn_symbolic import coefficient_extractor
 
 def matrix_to_params_batch(H_batch, K_batch):
     return (
