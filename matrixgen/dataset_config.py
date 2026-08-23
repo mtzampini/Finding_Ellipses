@@ -4,7 +4,7 @@ from typing import Dict
 
 @dataclass
 class DatasetConfig:
-    n_total_core: int = 4000
+    n_total_core: int = 8000
 
     case_proportions: Dict[int, float] = field(default_factory=lambda: {
         1: 0.15,   # normal
